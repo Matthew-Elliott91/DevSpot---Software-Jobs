@@ -1,3 +1,4 @@
+using DevSpot.Constants;
 using DevSpot.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -24,27 +25,35 @@ namespace DevSpot
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
-            if (!app.Environment.IsDevelopment())
+            //Creating a scope for roles
+            using (var scope = app.Services.CreateScope())
             {
-                app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
+                var services = scope.ServiceProvider;
+                RoleSeeder.SeedRolesAsync(services).Wait();
+
+
+                // Configure the HTTP request pipeline.
+                if (!app.Environment.IsDevelopment())
+                {
+                    app.UseExceptionHandler("/Home/Error");
+                    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                    app.UseHsts();
+                }
+
+                app.UseHttpsRedirection();
+                app.UseRouting();
+
+                app.UseAuthorization();
+
+                app.MapRazorPages();
+                app.MapStaticAssets();
+                app.MapControllerRoute(
+                        name: "default",
+                        pattern: "{controller=Home}/{action=Index}/{id?}")
+                    .WithStaticAssets();
+
+                app.Run();
             }
-
-            app.UseHttpsRedirection();
-            app.UseRouting();
-
-            app.UseAuthorization();
-
-            app.MapRazorPages();
-            app.MapStaticAssets();
-            app.MapControllerRoute(
-                name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}")
-                .WithStaticAssets();
-
-            app.Run();
         }
     }
 }
