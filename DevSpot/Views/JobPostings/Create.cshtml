@@ -1,0 +1,36 @@
+﻿@model DevSpot.Models.JobPosting
+
+
+<div class="container mt-5">
+	<h1 class="mb-4">Create a Job Posting</h1>
+	<form>
+		<div action="Create" method="post" class="mb-3">
+			<label asp-for="Title" class="form-label">Title</label>
+			<input class="form-control" id="Title" aria-describedby="emailHelp" placeholder="Enter Job Title">
+		</div>
+		<div class="mb-3">
+			<label asp-for="Description" class="form-label">Please Enter the Job Description</label>
+			<textarea class="form-control" id="Description" rows="5"></textarea>
+		</div>
+		<div class="mb-3">
+			<label asp-for="Company" class="form-label">Company</label>
+			<input class="form-control" id="Company" placeholder="Company Here">
+		</div>
+		<div class="mb-4">
+			<label asp-for="Location" class="form-label">Please Enter the Job Location</label>
+			<input class="form-control" id="Location" placeholder="Location">
+		</div>
+		<button type="submit" class="btn btn-primary">Submit</button>
+	</form>
+</div>
+
+<script src="https://cdn.tiny.cloud/1/jfvxgxv0kp0zol4hfj15m9lik7i6mgmfufourkp49i46azti/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+	tinymce.init({
+		selector: '#Description',
+		plugins: 'lists',
+		toolbar: 'undo redo | bold italic | bullist numlist outdent indent',
+		menubar: false
+	});
+</script>
+
