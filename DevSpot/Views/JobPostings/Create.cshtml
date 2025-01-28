@@ -1,24 +1,27 @@
-﻿@model DevSpot.Models.JobPosting
+﻿@model DevSpot.ViewModels.JobPostingViewModel
+
 
 
 <div class="container mt-5">
-	<h1 class="mb-4">Create a Job Posting</h1>
-	<form>
-		<div action="Create" method="post" class="mb-3">
+	
+	<form method="post" action="Create">
+		<div asp-validation-summary="All" class="text-danger"></div>
+		<div class="mb-3">
 			<label asp-for="Title" class="form-label">Title</label>
-			<input class="form-control" id="Title" aria-describedby="emailHelp" placeholder="Enter Job Title">
+			<input asp-for="Title" class="form-control" id="Title" aria-describedby="emailHelp" placeholder="Enter Job Title">
 		</div>
 		<div class="mb-3">
 			<label asp-for="Description" class="form-label">Please Enter the Job Description</label>
-			<textarea class="form-control" id="Description" rows="5"></textarea>
+			<textarea asp-for="Description" class="form-control" id="Description" rows="5"></textarea>
+			<span asp-validation-for="Description" class="text-bg-danger"></span>
 		</div>
 		<div class="mb-3">
 			<label asp-for="Company" class="form-label">Company</label>
-			<input class="form-control" id="Company" placeholder="Company Here">
+			<input asp-for="Company" class="form-control" id="Company" placeholder="Company Here">
 		</div>
 		<div class="mb-4">
 			<label asp-for="Location" class="form-label">Please Enter the Job Location</label>
-			<input class="form-control" id="Location" placeholder="Location">
+			<input asp-for="Location" class="form-control" id="Location" placeholder="Location">
 		</div>
 		<button type="submit" class="btn btn-primary">Submit</button>
 	</form>
@@ -34,3 +37,7 @@
 	});
 </script>
 
+@section Scripts {
+	<partial name="_ValidationScriptsPartial" />
+
+}

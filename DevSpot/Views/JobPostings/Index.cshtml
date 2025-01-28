@@ -1,7 +1,15 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model IEnumerable<DevSpot.Models.JobPosting>
 
-<h1>Job Postings</h1>
+<div class="list-group">
+	@foreach (var jobPosting in Model)
+	{
+		<div class="list-group-item list-group-item-action">
+			<h3>@jobPosting.Title</h3>
+			<div>@Html.Raw(jobPosting.Description)</div>
+			<p><strong>Company:</strong>@jobPosting.Company</p>
+			<p><strong>Location:</strong>@jobPosting.Location</p>
+			<p><strong>Date Posted:</strong>@jobPosting.PostedDate.ToShortDateString()</p>
+		</div>
+	}
+</div>
+
