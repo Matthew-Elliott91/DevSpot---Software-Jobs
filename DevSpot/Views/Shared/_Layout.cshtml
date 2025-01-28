@@ -24,7 +24,18 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="JobPostings" asp-action="Index">All Jobs</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="JobPostings" asp-action="Create">Create Job</a>
+	                        <a class="nav-link text-dark" asp-area="" asp-controller="JobPostings" asp-action="Create">Create Job</a>
+                        </li>
+                        <li class="nav-item">
+	                        <a class="nav-link text-dark" asp-area="" asp-controller="JobPostings" asp-action="MyJobPostings">My Job Postings</a>
+                        </li>
+                        <li class="nav-item">
+	                        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
+                        </li>
+                        <li class="nav-item">
+	                        <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" class="d-inline">
+		                        <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+	                        </form>
                         </li>
                     </ul>
                 </div>
@@ -32,6 +43,12 @@
         </nav>
     </header>
 <div class="container">
+	@if (TempData["LogoutMessage"] != null)
+	{
+		<div class="alert alert-success" role="alert">
+			@TempData["LogoutMessage"]
+		</div>
+	}
 	<div class="card bg-secondary text-white mb-3">
 		<div class="card-body">
 			<h2 class="card-title text-center">@ViewData["Title"]</h2>

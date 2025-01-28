@@ -29,6 +29,14 @@ namespace DevSpot.Controllers
             var jobPostings = await _jobPostingRepository.GetAllAsync();
             return View(jobPostings);
         }
+
+        public async Task<IActionResult> MyJobPostings()
+        {
+
+            ViewData["Title"] = "All Job Postings";
+            var jobPostings = await _jobPostingRepository.GetAllAsync();
+            return View(jobPostings);
+        }
         [Authorize(Roles = "Admin, Employer")]
         public IActionResult Create()
         {
