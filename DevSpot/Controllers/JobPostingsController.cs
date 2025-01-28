@@ -29,13 +29,15 @@ namespace DevSpot.Controllers
             var jobPostings = await _jobPostingRepository.GetAllAsync();
             return View(jobPostings);
         }
-
+        [Authorize(Roles = "Admin, Employer")]
         public async Task<IActionResult> MyJobPostings()
         {
 
-            ViewData["Title"] = "All Job Postings";
-            var jobPostings = await _jobPostingRepository.GetAllAsync();
-            return View(jobPostings);
+            ViewData["Title"] = "My Job Postings";
+            var allJobPostings = await _jobPostingRepository.GetAllAsync();
+            var userId = _userManager.GetUserId(User);
+            var filteredJobPostings = allJobPostings.Where(j => j.UserId == userId);
+            return View(filteredJobPostings);
         }
         [Authorize(Roles = "Admin, Employer")]
         public IActionResult Create()
