@@ -1,13 +1,16 @@
 ﻿using System.Security.AccessControl;
+using DevSpot.Constants;
 using DevSpot.Models;
 using DevSpot.Repositories;
 using DevSpot.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace DevSpot.Controllers
 {
+    [Authorize]
     public class JobPostingsController : Controller
     {
         private readonly IRepository<JobPosting> _jobPostingRepository;
@@ -18,6 +21,7 @@ namespace DevSpot.Controllers
             _jobPostingRepository = repository;
             _userManager = userManager;
         }
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
 
@@ -25,7 +29,7 @@ namespace DevSpot.Controllers
             var jobPostings = await _jobPostingRepository.GetAllAsync();
             return View(jobPostings);
         }
-
+        [Authorize(Roles = "Admin, Employer")]
         public IActionResult Create()
         {
             ViewData["Title"] = "Create a Job Posting";
@@ -33,6 +37,7 @@ namespace DevSpot.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin, Employer")]
         public async Task<IActionResult> Create(JobPostingViewModel jobPostingVm)
         {
            
@@ -52,6 +57,31 @@ namespace DevSpot.Controllers
             }
 
             return View(jobPostingVm);
+        }
+
+        [HttpDelete]
+        [Authorize(Roles = "Admin, Employer")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var jobPosting = await _jobPostingRepository.GetByIdAsync(id);
+            if (jobPosting == null)
+            {
+                return NotFound();
+            }
+            var currentUserId = _userManager.GetUserId(User);
+            if (User.IsInRole(Roles.Admin) == false && currentUserId != jobPosting.UserId)
+            {
+               return Forbid();
+            }
+           
+
+            await _jobPostingRepository.DeleteAsync(id);
+            return RedirectToAction(nameof(Index));
+
+           
+
+
+
         }
     }
 }

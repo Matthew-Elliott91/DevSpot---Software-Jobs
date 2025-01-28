@@ -36,11 +36,7 @@ namespace DevSpot.Repositories
         public async Task<JobPosting> GetByIdAsync(int id)
         {
             var jobPosting = await _context.JobPostings.FindAsync(id);
-            if (jobPosting == null)
-            {
-                throw new KeyNotFoundException();
-
-            }
+         
             return jobPosting;
         }
 
