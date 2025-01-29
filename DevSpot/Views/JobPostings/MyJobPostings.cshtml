@@ -11,7 +11,7 @@
 			<div>@Html.Raw(jobPosting.Description)</div>
 			<p><strong>Company:</strong>@jobPosting.Company</p>
 			<p><strong>Location:</strong>@jobPosting.Location</p>
-			<p><strong>Date Posted:</strong>@jobPosting.PostedDate.ToShortDateString()</p>
+			<p><strong>Date Posted:</strong>@jobPosting.DatePosted.ToShortDateString()</p>
 			
 			@if (User.IsInRole(Roles.Admin) || User.IsInRole(Roles.Employer))
 			{

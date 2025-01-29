@@ -1,12 +1,11 @@
-﻿using System.Security.AccessControl;
-using DevSpot.Constants;
+﻿using DevSpot.Constants;
 using DevSpot.Models;
 using DevSpot.Repositories;
+using DevSpot.Services;
 using DevSpot.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace DevSpot.Controllers
 {
@@ -15,30 +14,42 @@ namespace DevSpot.Controllers
     {
         private readonly IRepository<JobPosting> _jobPostingRepository;
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly JobPostingService _jobPostingService;
 
-        public JobPostingsController(UserManager<IdentityUser> userManager, IRepository<JobPosting> repository)
+        public JobPostingsController(UserManager<IdentityUser> userManager, IRepository<JobPosting> repository, JobPostingService jobPostingService)
         {
             _jobPostingRepository = repository;
             _userManager = userManager;
+            _jobPostingService = jobPostingService;
         }
+
         [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
-
             ViewData["Title"] = "All Job Postings";
             var jobPostings = await _jobPostingRepository.GetAllAsync();
             return View(jobPostings);
         }
+
+        [AllowAnonymous]
+        public async Task<IActionResult> ExternalJobPostings()
+        {
+            ViewData["Title"] = "External Job Postings";
+            var apiJobPostings = await _jobPostingService.GetJobPostingsAsync();
+            return View(apiJobPostings);
+        }
+
+
         [Authorize(Roles = "Admin, Employer")]
         public async Task<IActionResult> MyJobPostings()
         {
-
             ViewData["Title"] = "My Job Postings";
             var allJobPostings = await _jobPostingRepository.GetAllAsync();
             var userId = _userManager.GetUserId(User);
             var filteredJobPostings = allJobPostings.Where(j => j.UserId == userId);
             return View(filteredJobPostings);
         }
+
         [Authorize(Roles = "Admin, Employer")]
         public IActionResult Create()
         {
@@ -50,7 +61,6 @@ namespace DevSpot.Controllers
         [Authorize(Roles = "Admin, Employer")]
         public async Task<IActionResult> Create(JobPostingViewModel jobPostingVm)
         {
-           
             if (ModelState.IsValid)
             {
                 var jobPosting = new JobPosting
@@ -60,7 +70,6 @@ namespace DevSpot.Controllers
                     Company = jobPostingVm.Company,
                     Location = jobPostingVm.Location,
                     UserId = _userManager.GetUserId(User)
-
                 };
                 await _jobPostingRepository.AddAsync(jobPosting);
                 return RedirectToAction(nameof(Index));
@@ -79,21 +88,13 @@ namespace DevSpot.Controllers
                 return NotFound();
             }
             var currentUserId = _userManager.GetUserId(User);
-            if (User.IsInRole(Roles.Admin) == false && currentUserId != jobPosting.UserId)
+            if (!User.IsInRole(Roles.Admin) && currentUserId != jobPosting.UserId)
             {
-               return Forbid();
+                return Forbid();
             }
-           
 
             await _jobPostingRepository.DeleteAsync(id);
             return RedirectToAction(nameof(Index));
-
-           
-
-
-
         }
     }
 }
-
-

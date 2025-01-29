@@ -1,0 +1,31 @@
+﻿
+@model IEnumerable<DevSpot.Models.ApiJobPosting>
+
+@{
+	ViewData["Title"] = "External Job Postings";
+}
+
+<div class="list-group">
+	@foreach (var jobPosting in Model)
+	{
+		<div class="list-group-item list-group-item-action">
+			<h3>@jobPosting.Title</h3>
+			<div>@Html.Raw(jobPosting.ShortDescription)</div>
+			<p><strong>Company:</strong> @jobPosting.CompanyObject?.Name</p>
+			<p><strong>Location:</strong> @jobPosting.Location</p>
+			<p><strong>Postal Code:</strong> @jobPosting.PostalCode</p>
+			<p><strong>Remote:</strong> @(jobPosting.Remote ? "Yes" : "No")</p>
+			<p><strong>Hybrid:</strong> @(jobPosting.Hybrid ? "Yes" : "No")</p>
+			<p><strong>Salary:</strong> @jobPosting.SalaryString</p>
+			<p><strong>Company Domain:</strong> @jobPosting.CompanyDomain</p>
+			<p><strong>Date Posted:</strong> @jobPosting.DatePosted.ToShortDateString()</p>
+			@if (!string.IsNullOrEmpty(jobPosting.CompanyObject?.Logo))
+			{
+				<p><strong>Company Logo:</strong></p>
+				<img src="@jobPosting.CompanyObject.Logo" alt="Company Logo" style="max-width: 100px;" />
+			}
+			@* <p><strong>Company Recruiting Agency:</strong> @(jobPosting.CompanyObject?.IsRecruitingAgency ? "Yes" : "No")</p> *@
+			<p><strong>Job URL:</strong> <a href="@jobPosting.Url" target="_blank">@jobPosting.Url</a></p>
+		</div>
+	}
+</div>

@@ -38,7 +38,7 @@ namespace DevSpot.tests
                 Description = "Develop software",
                 Company = "DevSpot",
                 Location = "Remote",
-                PostedDate = DateTime.Now,
+                DatePosted = DateTime.Now,
                 IsApproved = true,
                 UserId = "Test"
 
@@ -63,7 +63,7 @@ namespace DevSpot.tests
                 Description = "Develop software",
                 Company = "DevSpot",
                 Location = "Remote",
-                PostedDate = DateTime.Now,
+                DatePosted = DateTime.Now,
                 IsApproved = true,
                 UserId = "Test1"
             };
@@ -90,7 +90,7 @@ namespace DevSpot.tests
                 Description = "Develop software",
                 Company = "DevSpot",
                 Location = "Remote",
-                PostedDate = DateTime.Now,
+                DatePosted = DateTime.Now,
                 IsApproved = true,
                 UserId = "Test2"
             };
@@ -114,7 +114,7 @@ namespace DevSpot.tests
                 Description = "Develop software",
                 Company = "DevSpot",
                 Location = "Remote",
-                PostedDate = DateTime.Now,
+                DatePosted = DateTime.Now,
                 IsApproved = true,
                 UserId = "Test3"
             };
@@ -138,7 +138,7 @@ namespace DevSpot.tests
                 Description = "Develop software",
                 Company = "DevSpot",
                 Location = "Remote",
-                PostedDate = DateTime.Now,
+                DatePosted = DateTime.Now,
                 IsApproved = true,
                 UserId = "Test4"
             };
@@ -148,7 +148,7 @@ namespace DevSpot.tests
                 Description = "Develop software",
                 Company = "DevSpot",
                 Location = "Remote",
-                PostedDate = DateTime.Now,
+                DatePosted = DateTime.Now,
                 IsApproved = true,
                 UserId = "Test5"
             };
@@ -170,7 +170,7 @@ namespace DevSpot.tests
                 Description = "Develop software",
                 Company = "DevSpot",
                 Location = "Remote",
-                PostedDate = DateTime.Now,
+                DatePosted = DateTime.Now,
                 IsApproved = true,
                 UserId = "Test6"
             };
