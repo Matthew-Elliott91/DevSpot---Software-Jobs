@@ -36,7 +36,8 @@ namespace DevSpot.Controllers
         {
             ViewData["Title"] = "External Job Postings";
             var apiJobPostings = await _jobPostingService.GetJobPostingsAsync();
-            return View(apiJobPostings);
+            var jobPostings = _jobPostingService.MapToJobPostings(apiJobPostings);
+            return View(jobPostings);
         }
 
 

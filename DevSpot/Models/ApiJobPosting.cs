@@ -41,15 +41,7 @@ namespace DevSpot.Models
 
         [JsonPropertyName("company_object")]
         public ApiCompany CompanyObject { get; set; }
-        public string ShortDescription
-        {
-            get
-            {
-                if (Description.Length <= 100)
-                    return Description;
-                return Description.Substring(0, 100) + "...";
-            }
-        }
+       
 
 
     }
