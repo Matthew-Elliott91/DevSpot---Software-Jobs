@@ -4,6 +4,7 @@ using DevSpot.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DevSpot.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250129110815_Allowedallcompanynullables")]
+    partial class Allowedallcompanynullables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -60,6 +63,7 @@ namespace DevSpot.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CompanyDomain")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("CompanyObjectId")
@@ -79,6 +83,7 @@ namespace DevSpot.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("JobUrl")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Location")
@@ -86,12 +91,14 @@ namespace DevSpot.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PostalCode")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("Remote")
                         .HasColumnType("bit");
 
                     b.Property<string>("SalaryString")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
@@ -99,6 +106,7 @@ namespace DevSpot.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Url")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")

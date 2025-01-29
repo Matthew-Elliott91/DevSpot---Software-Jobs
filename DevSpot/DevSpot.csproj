@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="wwwroot\Images\Flag_of_Yorkshire.svg.png" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="9.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="9.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.0" />
@@ -23,7 +19,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="wwwroot\Images\Flag_of_Yorkshire.svg.png" />
+    <Content Update="wwwroot\Images\Flag_of_Yorkshire.svg.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

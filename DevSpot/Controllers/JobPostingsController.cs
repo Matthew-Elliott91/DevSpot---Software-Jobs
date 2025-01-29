@@ -26,7 +26,7 @@ namespace DevSpot.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
-            ViewData["Title"] = "All Job Postings";
+            ViewData["Title"] = "Direct Listings";
             var jobPostings = await _jobPostingRepository.GetAllAsync();
             return View(jobPostings);
         }
