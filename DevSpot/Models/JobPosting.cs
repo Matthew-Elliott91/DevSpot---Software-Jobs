@@ -41,7 +41,9 @@ namespace DevSpot.Models
             }
         }
         public Company CompanyObject { get; set; }
-        
+
+      
+
     }
     public class Company
     {

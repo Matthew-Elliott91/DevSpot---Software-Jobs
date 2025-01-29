@@ -34,7 +34,7 @@ namespace DevSpot.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> ExternalJobPostings()
         {
-            ViewData["Title"] = "External Job Postings";
+            ViewData["Title"] = "Yorkshire Job Postings";
             var apiJobPostings = await _jobPostingService.GetJobPostingsAsync();
             var jobPostings = _jobPostingService.MapToJobPostings(apiJobPostings);
             return View(jobPostings);
