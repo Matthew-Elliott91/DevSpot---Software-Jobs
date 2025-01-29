@@ -36,7 +36,8 @@ namespace DevSpot.Services
                 },
                 posted_at_max_age_days = 15,
                 job_country_code_or = new[] { "GB" },
-                job_title_or = new[] { 
+                job_title_or = new[]
+                {
                     "Junior Software Developer",
                     "Junior Software Engineer",
                     "Junior Developer",
@@ -75,8 +76,9 @@ namespace DevSpot.Services
                     "IT Graduate Developer",
                     "IT Graduate Software Engineer",
                     "IT Entry-Level Developer",
-                    "IT Entry-Level Programmer" },
-                job_location_pattern_or = new []
+                    "IT Entry-Level Programmer"
+                },
+                job_location_pattern_or = new[]
                 {
                     "Leeds",
                     "Sheffield",
@@ -127,29 +129,6 @@ namespace DevSpot.Services
             return jobPostingsResponse.Data;
         }
 
-        public List<JobPosting> MapToJobPostings(List<ApiJobPosting> apiJobPostings)
-        {
-            return apiJobPostings.Select(apiJobPosting => new JobPosting
-            {
-                Title = apiJobPosting.Title,
-                Company = apiJobPosting.Company,
-                Location = apiJobPosting.Location,
-                DatePosted = apiJobPosting.DatePosted,
-                Description = apiJobPosting.Description,
-                SalaryString = apiJobPosting.SalaryString,
-                Remote = apiJobPosting.Remote,
-                Hybrid = apiJobPosting.Hybrid,
-                JobUrl = apiJobPosting.Url,
-                CompanyDomain = apiJobPosting.CompanyDomain,
-                CompanyObject = new Company
-                {
-                    Name = apiJobPosting.CompanyObject?.Name,
-                    Domain = apiJobPosting.CompanyObject?.Domain,
-                    Logo = apiJobPosting.CompanyObject?.Logo,
-                    IsRecruitingAgency = apiJobPosting.CompanyObject?.IsRecruitingAgency
-                }
-            }).ToList();
-        }
     }
 
 

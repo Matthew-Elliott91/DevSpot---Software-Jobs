@@ -31,15 +31,7 @@ namespace DevSpot.Models
         public string? CompanyDomain { get; set; }
         public string? PostalCode { get; set; }
         public string? Url { get; set; }
-        public string? ShortDescription
-        {
-            get
-            {
-                if (Description.Length <= 100)
-                    return Description;
-                return Description.Substring(0, 100) + "...";
-            }
-        }
+       
         public Company? CompanyObject { get; set; }
 
       

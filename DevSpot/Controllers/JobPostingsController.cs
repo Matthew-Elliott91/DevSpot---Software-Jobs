@@ -36,9 +36,9 @@ namespace DevSpot.Controllers
         {
             ViewData["Title"] = "Yorkshire Job Postings";
             var apiJobPostings = await _jobPostingService.GetJobPostingsAsync();
-            var jobPostings = _jobPostingService.MapToJobPostings(apiJobPostings);
-            return View(jobPostings);
+            return View(apiJobPostings);
         }
+
 
 
         [Authorize(Roles = "Admin, Employer")]
